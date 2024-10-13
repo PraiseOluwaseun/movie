@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="next-container">
+        <div class="login-container">
+            <h1>Log In</h1>
+            <form [formGroup]="loginForm" (ngSubmit)="login()">
+
+                <div class="input-container">
+                    <img class="user" src="icons8-user-32.png" alt="user"> 
+                    <input formControlName="user" type="text" placeholder="User" name="user"/>
+                </div>
+                <div *ngIf="loginForm.get('user')?.invalid && loginForm.get('user')?.touched">
+                    <small class="error">Please enter a valid user</small>
+                </div>
+            
+                <div class="input-container">
+                    <img src="icons8-secure-32 (1).png" alt="password"> 
+                    <input formControlName="password" type="password" placeholder="Password" name="password"/>
+                </div>
+                <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+                    <small class="error">Password must be at least 6 characters</small>
+                </div>
+
+                <div class="input-container">
+                    <button type="submit" [disabled]="loginForm.invalid">Log In</button>
+                    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+
+                </div>
+                <div class="google">
+                    <p>Or</p>
+                    <img src="icons8-google-32.png" alt="google" (click)="loginWithGoogle()">
+                </div>
+               
+            </form>
+            <p>Dont have an account? <a routerLink="/signup">Sign Up here</a></p>
+            
+        </div>
+        <div class="message">
+            <h2>Welcome Back</h2>
+            
+            
+        </div>
+    </div>
+    
+</div>
+  

@@ -1,0 +1,157 @@
+<!-- admin.component.html -->
+<div class="container">
+  <div class="movie-input">
+    <form [formGroup]="movieForm" (ngSubmit)="onSubmit()">
+      <h4>Please fill the details to upload a movie:</h4>
+
+      
+      <div>
+        <label for="movieTitle" class="input-container">Movie Title:</label>
+        <input id="movieTitle" formControlName="movieTitle" placeholder="Enter movie title">
+        <div *ngIf="movieForm.get('movieTitle')?.invalid && movieForm.get('movieTitle')?.touched">
+          <small class="error">Movie title is required.</ small>
+        </div>
+      </div>
+    
+      
+      <div>
+        <label for="releaseDate" class="input-container">Release Date:</label>
+        <input id="releaseDate" formControlName="releaseDate" type="date">
+        <div *ngIf="movieForm.get('releaseDate')?.invalid && movieForm.get('releaseDate')?.touched">
+          <small class="error">Release date is required.</small>
+        </div>
+      </div>
+    
+      
+      <div>
+        <label for="movieDescription" class="input-container">Description:</label>
+        <textarea id="movieDescription" formControlName="movieDescription" placeholder="Enter movie description"></textarea>
+        <div *ngIf="movieForm.get('movieDescription')?.invalid && movieForm.get('movieDescription')?.touched">
+          <small class="error">Movie description is required.</small>
+        </div>
+      </div>
+    
+      
+      <div>
+        <label for="moviePoster" class="input-container1"> Poster:</label>
+        <input id="moviePoster" formControlName="moviePoster" placeholder="Enter director picture" type="file" accept=".jpg, .jpeg, .png, .gif">
+        <div *ngIf="movieForm.get('moviePoster')?.invalid && movieForm.get('moviePoster')?.touched">
+          <small class="error">Movie Poster is required.</small>
+        </div>
+      </div>
+    
+      
+      <div>
+        <label for="genre" class="input-container">Genre:</label>
+        <select id="genre" formControlName="genre">
+          <option value="">Select a genre</option>
+          <option value="Animation">Animation</option>
+          <option value="Horror">Horror</option>
+          <option value="Thriller">Thriller</option>
+          <option value="Fantasy">Fantasy</option>
+          <option value="Medieval">Medieval</option>
+          <option value="Sci-Fi">Sci-Fi</option>
+          <option value="Romance">Romance</option>
+        </select>
+        <div *ngIf="movieForm.get('genre')?.invalid && movieForm.get('genre')?.touched">
+          <small class="error">Genre is required.</small>
+        </div>
+      </div>
+    
+      
+      <div>
+        <label for="directorName" class="input-container">Director Name:</label>
+        <input id="directorName" formControlName="directorName" placeholder="Enter director name">
+        <div *ngIf="movieForm.get('directorName')?.invalid && movieForm.get('directorName')?.touched">
+          <small class="error">Director name is required.</small>
+        </div>
+      </div>
+    
+      <div>
+        <label for="directorEmail" class="input-container">Director Email:</label>
+        <input id="directorEmail" formControlName="directorEmail" placeholder="Enter director email">
+        <div *ngIf="movieForm.get('directorEmail')?.invalid && movieForm.get('directorEmail')?.touched">
+          <small class="error">Valid email is required.</small>
+        </div>
+      </div>
+    
+      <div>
+        <label for="directorPicture" class="input-container1">Director Picture:</label>
+        <input id="directorPicture" formControlName="directorPicture" placeholder="Enter director picture" type="file" accept=".jpg, .jpeg, .png, .gif">
+        <div *ngIf="movieForm.get('directorPicture')?.invalid && movieForm.get('directorPicture')?.touched">
+          <small class="error">Director picture is required.</small>
+        </div>
+      </div>
+    
+      
+      <div formArrayName="castMembers" >
+        <div *ngFor="let castMember of castMembers.controls; let i = index" [formGroupName]="i">
+              <fieldset>
+                  <legend>Cast Members:</legend>
+          
+                  
+                  <div>
+                      <label for="actorName-{{ i }}" class="input-container">Actor Name:</label>
+                      <input id="actorName-{{ i }}" formControlName="actorName" placeholder="Enter actor name">
+                      <div *ngIf="castMember.get('actorName')?.invalid && castMember.get('actorName')?.touched">
+                      <small class="error">Actor name is required.</small>
+                      </div>
+                  </div>
+          
+                  
+                  <div>
+                      <label for="autobiographyLink-{{ i }}" class="input-container">Autobiography Link:</label>
+                      <input id="autobiographyLink-{{ i }}" formControlName="autobiographyLink" placeholder="Enter autobiography link">
+                      <div *ngIf="castMember.get('autobiography Link')?.invalid && castMember.get('autobiographyLink')?.touched">
+                      <small class="error">Autobiography link is required.</small>
+                      </div>
+                  </div>
+          
+                  
+                  <div>
+                      <label for="picture-{{ i }}" class="input-container1">Picture URL:</label>
+                      <input id="picture-{{ i }}" formControlName="picture" placeholder="Enter picture" type="file" accept=".jpg, .jpeg, .png, .gif">
+                      <div *ngIf="castMember.get('picture')?.invalid && castMember.get('picture')?.touched">
+                      <small class="error">Picture URL is required.</small>
+                      </div>
+                  </div>
+      
+              
+              <button type="button" (click)="removeCastMember(i)" class="button">Remove Cast Member</button>
+            </fieldset>
+         </div>
+    
+        
+        <button type="button" (click)="addCastMember()" class="button">Add Cast Member</button>
+      </div>
+      <div>
+        <label for="randomPictures" class="input-container1">Random Pictures (Max 5):</label>
+        <input type="file" (change)="addRandomPicture($event)" accept=".jpg, .jpeg, .png, .gif">
+        <div *ngIf="randomPictures.invalid && randomPictures.touched">
+          <small class="error">You can upload a maximum of 5 pictures.</small>
+        </div>
+        
+        <div *ngFor="let picture of randomPictures.controls; let i = index">
+          <span>{{ picture.value.name }}</span>
+          <button type="button" (click)="removeRandomPicture(i)" class="button">Remove</button>
+        </div>
+      </div>
+
+    
+      
+      <button type="submit"  class="button">Submit</button>
+    </form>
+  </div>
+  <div *ngIf="submittedData">
+    <h4>Submitted Data:</h4>
+    <pre>{{ submittedData | json }}</pre>
+    <img [src]="submittedData.moviePoster" alt="Movie Poster">
+    <img [src]="submittedData.directorPicture" alt="Director Picture">
+    <div *ngFor="let castMember of submittedData.castMembers">
+      <img [src]="castMember.picture" alt="Cast Member Picture">
+    </div>
+    <div *ngFor="let picture of submittedData.randomPictures">
+      <img [src]="picture" alt="Random Picture">
+    </div>
+  </div>
+</div>

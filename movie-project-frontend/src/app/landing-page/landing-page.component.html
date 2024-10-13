@@ -1,0 +1,71 @@
+<div class="container">
+    <div class="navbar">
+        <a routerLink="/T3movies"><img src="nre.png" alt="logo"></a>
+        <div class="menu" (click)="toggleMenu()">
+            <img src="icons8-menu-48.png" alt="menu">
+        </div>
+        
+        <div *ngIf="menuVisible" class="dropdown-menu">
+            <div class="img"><img src="icons8-close-48.png" alt="close" (click)="toggleMenu()"></div>
+            <div class="menu-section">
+                <h4 (click)="toggleMovies()">Movies</h4>
+                
+                <ul *ngIf="moviesVisible">
+                    <li><a href="https://www.imdb.com/calendar/?ref_=nv_mv_cal">Release Calendar</a></li>
+                    <li><a href="https://www.imdb.com/chart/top/?ref_=nv_mv_250">Top 250 Movies</a></li>
+                    <li><a href="https://www.imdb.com/chart/moviemeter/?ref_=nv_mv_mpm">Most Popular Movies</a></li>
+                    <li><a href="#">Browser Movies by Genre</a></li>
+                    <li><a href="https://www.imdb.com/chart/boxoffice/?ref_=nv_ch_cht">Top Box Office</a></li>
+                    <li><a href="https://www.imdb.com/chart/boxoffice/?ref_=nv_ch_cht">Showtimes & Tickets</a></li>
+                    <li><a href="https://www.imdb.com/news/movie/?ref_=nv_nw_mv">Movie News</a></li>
+                    <li><a href="https://www.imdb.com/india/toprated/?ref_=nv_mv_in">India Movie Spotlight</a></li>
+                </ul>
+            </div>
+    
+            <div class="menu-section">
+                <h4 (click)="toggleCelebs()">Celebs</h4>
+                <ul *ngIf="celebsVisible">
+                    <li><a href="https://www.imdb.com/search/name/?birth_monthday=09-19">Born Today</a></li>
+                    <li><a href="https://www.imdb.com/chart/starmeter/?ref_=nv_cel_m">Most Popular Celebs</a></li>
+                    <li><a href="https://www.imdb.com/news/celebrity/?ref_=nv_cel_nw">Celebrity News</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="movie-display">
+        <div class="heading">
+
+
+
+        </div>
+    
+    </div>
+    <div class="watch-playlist">
+        <div class="coming">
+             <div class="heading">
+                 <h5>Coming soon to theatres</h5>
+                 <a href="https://www.imdb.com/calendar/?ref_=hm_cs_sm"><img src="icons8-right-arrow-50.png" alt="arrow"></a>
+             </div>
+             <p>Trailers for upcoming movies</p>
+         </div>
+    <div class="coming-soon">
+       <div class="coming">
+            <div class="heading1">
+                <h5>Coming soon to theatres</h5>
+                <a href="https://www.imdb.com/calendar/?ref_=hm_cs_sm"><img src="icons8-right-arrow-50.png" alt="arrow"></a>
+            </div>
+            <p>Trailers for upcoming movies</p>
+        </div>
+    </div>
+    <div class="top-news">
+    
+    </div>
+    <div class="recently-view">
+    
+    </div>
+    <div class="footer">
+    
+    </div>
+    
+</div>
