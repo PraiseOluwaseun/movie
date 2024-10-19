@@ -6,10 +6,10 @@
 
                 <div class="input-container">
                     <img class="user" src="icons8-user-32.png" alt="user"> 
-                    <input formControlName="user" type="text" placeholder="User" name="user"/>
+                    <input formControlName="email" type="email" placeholder="Email name="email"/>
                 </div>
-                <div *ngIf="loginForm.get('user')?.invalid && loginForm.get('user')?.touched">
-                    <small class="error">Please enter a valid user</small>
+                <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+                    <small class="error">Please enter a valid email</small>
                 </div>
             
                 <div class="input-container">

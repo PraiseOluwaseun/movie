@@ -30,10 +30,10 @@ export class LoginComponent {
 
   
   login() {
-    const { user, password } = this.loginForm.value;
+    const { email, password } = this.loginForm.value;
     this.errorMessage = '';
   
-    this.authService.login(user, password).subscribe({
+    this.authService.login(email, password).subscribe({
       next: (response) => {
         console.log('Login successful', response);
         this.router.navigate(['/T3movies']); 
