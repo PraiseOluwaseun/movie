@@ -5,12 +5,12 @@
             <form [formGroup]="loginForm" (ngSubmit)="login()">
 
                 <div class="input-container">
-                    <img class="user" src="icons8-user-32.png" alt="user"> 
-                    <input formControlName="email" type="email" placeholder="Email name="email"/>
-                </div>
-                <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+                    <img class="email" src="icons8-circled-envelope-32.png" alt="email">
+                    <input formControlName="email" type="email" placeholder="Email" name="email"/>
+                  </div>
+                  <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
                     <small class="error">Please enter a valid email</small>
-                </div>
+                  </div>
             
                 <div class="input-container">
                     <img src="icons8-secure-32 (1).png" alt="password"> 
