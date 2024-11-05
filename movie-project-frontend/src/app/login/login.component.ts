@@ -1,18 +1,18 @@
-import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
-import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  standalone: true,
+  imports: [ReactiveFormsModule, CommonModule],
+  styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   errorMessage: string = '';
 
@@ -20,23 +20,24 @@ export class LoginComponent {
     private router: Router,
     private fb: FormBuilder,
     private authService: AuthService,
-    private snackBar: MatSnackBar,
-  ) {
+    private snackBar: MatSnackBar
+  ) {}
+
+  ngOnInit(): void {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
-  
   login() {
     const { email, password } = this.loginForm.value;
     this.errorMessage = '';
-  
+    
     this.authService.login(email, password).subscribe({
       next: (response) => {
         console.log('Login successful', response);
-        this.router.navigate(['/T3movies']); 
+        this.router.navigate(['/dashboard']);
       },
       error: (error) => {
         console.error('Login failed', error);
@@ -44,9 +45,7 @@ export class LoginComponent {
       }
     });
   }
-  
 
- 
   loginWithGoogle() {
     this.authService.signInWithGoogle();
   }
